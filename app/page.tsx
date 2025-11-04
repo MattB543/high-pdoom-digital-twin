@@ -151,42 +151,48 @@ export default function ChatPage() {
       {/* Input */}
       <footer className="bg-white border-t border-gray-200 px-4 py-4">
         <div className="max-w-[700px] mx-auto">
-          <form onSubmit={handleSubmit} className="flex gap-2">
-            <button
-              type="button"
-              onClick={handleNewConversation}
-              className="px-3 py-3 text-gray-500 hover:text-gray-700 transition-colors"
-              title="New Chat"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-            </button>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2 md:flex-row">
+            {/* Input field - full width on mobile, flex-1 on desktop */}
             <input
               value={input}
               onChange={handleInputChange}
               placeholder="Type your message..."
               disabled={isLoading}
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent text-[15px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full md:flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent text-[15px] disabled:opacity-50 disabled:cursor-not-allowed"
             />
-            <button
-              type="submit"
-              disabled={isLoading || !input.trim()}
-              className="px-6 py-3 bg-gray-900 text-gray-50 rounded-lg hover:bg-gray-800 transition-colors font-medium text-[15px] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? "Sending..." : "Send"}
-            </button>
+
+            {/* Buttons container - side by side on mobile, stays in row on desktop */}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleNewConversation}
+                className="flex-1 md:flex-none px-4 py-3 text-gray-500 hover:text-gray-700 transition-colors border border-gray-300 rounded-lg flex items-center justify-center gap-2"
+                title="New Chat"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                  />
+                </svg>
+                <span className="text-[15px] font-medium">New Chat</span>
+              </button>
+              <button
+                type="submit"
+                disabled={isLoading || !input.trim()}
+                className="flex-1 md:flex-none px-6 py-3 bg-gray-900 text-gray-50 rounded-lg hover:bg-gray-800 transition-colors font-medium text-[15px] disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? "Sending..." : "Send"}
+              </button>
+            </div>
           </form>
 
           <p className="text-xs text-gray-500 mt-1 text-center">
